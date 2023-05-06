@@ -7,7 +7,6 @@ In contrast to the previous approach that used a classification model, this meth
 
 ![cutpaste_unet](https://github.com/tocom242242/CutPaste_UNet_AD/blob/main/fig/cutpaste_unet.png)
 
-![sample_result](https://github.com/tocom242242/CutPaste_UNet_AD/blob/main/fig/sample_result.png)
 
 
 
@@ -32,6 +31,8 @@ We evaluated the model on the Bottle dataset from MVTec AD. We trained the model
 
 - Image-level AUC: 0.99
 - Pixel-level AUC: 0.83
+
+![sample_result](https://github.com/tocom242242/CutPaste_UNet_AD/blob/main/fig/sample_result.png)
 
 Due to limited computing resources, we were not able to evaluate the model on all datasets in MVTec AD.
 
