@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ```
 3. Train the model and evaluate it:
 ```
-python main.py --dataset_dir <dataset_dir>
+python main.py --dataset_dir <path/to/dataset_dir> --result_dir <path/to/result_dir> --nb_epochs <epoch>
 ```
 Note that the dataset should have the same structure as the MVTec dataset.
 
