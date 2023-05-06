@@ -200,7 +200,10 @@ class CutPasteDataset(Dataset):
             cutpaste_mask = self.common_transform(outputs[1])
             cutpaste_mask = self.transform_cutpaste_mask(cutpaste_mask)
 
-            return cutpaste_img, cutpaste_mask,
+            return (
+                cutpaste_img,
+                cutpaste_mask,
+            )
         else:
             image_path = self.images[item]
             image = Image.open(image_path).convert("RGB")
@@ -257,51 +260,3 @@ class CutPasteDataset(Dataset):
         assert len(x) == len(y), "number of x and y should be same"
 
         return list(x), list(y), list(mask)
-
-
-# TODO: リファクタリング
-def plot_sample_datasets():
-    import matplotlib.pyplot as plt
-
-    dataset_path = r"C:\Users/test"
-    input_size = 224
-    dataset = CutPasteDataset(
-        train_images=dataset_path,
-        image_size=input_size,
-        mode="train",
-    )
-    loader = torch.utils.data.DataLoader(
-        dataset=dataset, batch_size=10, num_workers=0, shuffle=True
-    )
-
-    fig_img, ax_img = plt.subplots(5, 2, figsize=(20, 100))
-
-    def denormalization(x):
-        mean = np.array([0.485, 0.456, 0.406])
-        std = np.array([0.229, 0.224, 0.225])
-        x = (x * std) + mean
-
-        return x
-
-    def denormalization_anoimg(x):
-        x = x * 255.0
-        return x
-
-    for batch_idx, (inputs, labels) in enumerate(loader):
-        print(inputs.shape)
-        # plt.figure()
-        inputs = inputs.permute(0, 2, 3, 1)
-        labels = labels.permute(0, 2, 3, 1)
-        for b in range(5):
-            tmp_img = denormalization(inputs[b])
-            ax_img[b][0].imshow(tmp_img)
-            tmp_img2 = denormalization_anoimg(labels[b])
-            tmp_img2 = np.squeeze(tmp_img2)
-            ax_img[b][1].imshow(tmp_img2, cmap="gray")
-        # plt.imshow(inputs.numpy())
-        plt.savefig(r"cutpaste_imgs/test.png", dpi=300, bbox_inches="tight")
-        plt.close()
-        break
-
-
-# plot_sample_datasets()
