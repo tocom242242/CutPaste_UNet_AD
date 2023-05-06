@@ -7,6 +7,9 @@ In contrast to the previous approach that used a classification model, this meth
 
 ![cutpaste_unet](https://github.com/tocom242242/CutPaste_UNet_AD/blob/main/fig/cutpaste_unet.png)
 
+![sample_result](https://github.com/tocom242242/CutPaste_UNet_AD/blob/main/fig/sample_result.png)
+
+
 
 ## How To Use
 
