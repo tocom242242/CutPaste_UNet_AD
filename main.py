@@ -66,7 +66,7 @@ def parse_args():
     )
 
     parser.add_argument("--seed", default=1024)
-    parser.add_argument("--nb_epochs", default=1)
+    parser.add_argument("--nb_epochs", type=int, default=1)
     parser.add_argument("--input_size", default=100)
     args = parser.parse_args()
 

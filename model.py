@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 import utils
 from unet import UNet
+import gc
 
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
@@ -27,12 +28,13 @@ class UNet_CutPaste_AD:
             for (img, gt) in train_loader:
                 self.optimizer.zero_grad()
                 img = img.to(device)
+                gt = gt.to(device)
                 output = self.model(img)
                 loss = self.criterion(output, gt)
                 loss.backward()
                 self.optimizer.step()
                 train_loss.update(loss.item(), img.shape[0])
-                print("epoch:", epoch, train_loss)
+            print("epoch:", epoch, train_loss)
 
     def evaluate(self, test_loader):
         gts, gt_masks, test_imgs, img_paths, score_maps = [], [], [], [], []
@@ -42,9 +44,10 @@ class UNet_CutPaste_AD:
             gts.extend(y.cpu().detach().numpy())
             gt_masks.extend(mask.cpu().detach().numpy())
             img_paths.extend(list(img_path))
-
+            x = x.to(device)
             score_map = torch.squeeze(self.model(x), dim=1)
-            score_maps.extend(score_map.detach().numpy())
+            score_maps.extend(score_map.cpu().detach().numpy())
+            gc.collect()
         score_maps = np.array(score_maps)
 
         for i in range(score_maps.shape[0]):

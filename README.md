@@ -1,5 +1,5 @@
 
-# CutPaste+UNet
+# CutPaste+UNet for Anomaly Detection
 CutPasteによって生成したデータによって学習したUNetによる異常検知
 
 ## CutPasteにより得たデータ
