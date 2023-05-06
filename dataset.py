@@ -11,6 +11,7 @@ from torchvision import datasets, transforms
 
 
 class CutPaste(object):
+    # from https://github.com/LilitYolyan/CutPaste
     def __init__(self, transform=True, _type="binary"):
 
         """
@@ -69,7 +70,6 @@ class CutPaste(object):
         self,
         image,
         area_ratio=(0.002, 0.01),
-        # area_ratio=(0.02, 0.15),
         aspect_ratio=((0.3, 1), (1, 3.3)),
     ):
         """
@@ -220,6 +220,7 @@ class CutPasteDataset(Dataset):
             return image, y, mask, image_path
 
     def load_dataset_folder(self):
+        # from https://github.com/xiahaifeng1995/PaDiM-Anomaly-Detection-Localization-master/blob/main/datasets/mvtec.py
         x, y, mask = [], [], []
 
         img_dir = os.path.join(self.dataset_path, self.mode)
