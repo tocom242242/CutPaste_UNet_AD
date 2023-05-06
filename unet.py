@@ -1,5 +1,4 @@
-# https://github.com/milesial/Pytorch-UNet/blob/master/unet/unet_model.py
-# https://github.com/milesial/Pytorch-UNet
+# from https://github.com/milesial/Pytorch-UNet
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
